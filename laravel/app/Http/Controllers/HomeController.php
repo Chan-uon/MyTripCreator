@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Airline;
+use App\Flight;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,34 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $select_flights = 20;
+        $flights = null;
+        if (Flight::get()->isEmpty())
+        {
+            while($select_flights > 0){
+                $origin = Airline::inRandomOrder()->first();
+                $destination = Airline::inRandomOrder()->first();
+                if ($origin->id !== $destination->id)
+                {
+                    $flight = new Flight;
+                    $flight->origin = $origin->location .", ".
+                                  $origin->province . " - ".
+                                  $origin->airport . " ".
+                                  "(". $origin->iata . ")";
+                    $flight->destination = $destination->location .", ".
+                                  $destination->province . " - ".
+                                  $destination->airport . " ".
+                                  "(". $destination->iata . ")";
+                    $flight->save();
+                    $select_flights--;
+                }
+            }
+        }
+        else
+        {
+           $flights = Flight::all();
+        }
+
+        return view('home', ['flights'=>$flights]);
     }
 }
