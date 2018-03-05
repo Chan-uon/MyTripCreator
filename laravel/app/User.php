@@ -27,6 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * Get the flights that belong to this user.
+     *
+     * @return object
+     */
     public function flights()
     {
         return $this->belongsToMany(Flight::class, 'trips', 'user_id', 'flight_id')

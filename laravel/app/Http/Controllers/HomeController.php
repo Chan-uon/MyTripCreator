@@ -10,6 +10,17 @@ use Auth;
 
 class HomeController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Home Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for generating a random list of flights
+    | and inserting them into their table. It also handles requests
+    | for adding a flight to a trip. Lastly, it displays the user's dashboard.
+    |
+    */
+
     /**
      * Create a new controller instance.
      *
@@ -39,13 +50,13 @@ class HomeController extends Controller
                 {
                     $flight = new Flight;
                     $flight->origin = $origin->location .", ".
-                                  $origin->province . " - ".
-                                  $origin->airport . " ".
-                                  "(". $origin->iata . ")";
+                                      $origin->province . " - ".
+                                      $origin->airport . " ".
+                                      "(". $origin->iata . ")";
                     $flight->destination = $destination->location .", ".
-                                  $destination->province . " - ".
-                                  $destination->airport . " ".
-                                  "(". $destination->iata . ")";
+                                           $destination->province . " - ".
+                                           $destination->airport . " ".
+                                           "(". $destination->iata . ")";
                     $flight->save();
                     $select_flights--;
                 }
@@ -59,10 +70,17 @@ class HomeController extends Controller
         return view('home', ['flights'=>$flights]);
     }
 
+    /**
+     * Add a flight to trips table.
+     *
+     * @param int
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function add($flight)
     {
         $target = Trip::where('flight_id', '=', $flight)
-                    ->where('user_id', '=', Auth::id())->get();
+                      ->where('user_id', '=', Auth::id())->get();
         if ($target->isEmpty())
         {
             $trip = new Trip;
