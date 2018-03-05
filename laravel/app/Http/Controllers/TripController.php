@@ -11,7 +11,7 @@ class TripController extends Controller
     public function  index()
     {
         $user = User::find(Auth::id());
-        $trips = $user->trips;
+        $trips = $user->flights;
 
         return view('trip', ['trips'=> $trips]);
     }
