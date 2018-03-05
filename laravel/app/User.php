@@ -29,6 +29,7 @@ class User extends Authenticatable
 
     public function flights()
     {
-        return $this->belongsToMany(Flight::class, 'trips', 'user_id', 'flight_id');
+        return $this->belongsToMany(Flight::class, 'trips', 'user_id', 'flight_id')
+                    ->orderBy('origin', 'asc');
     }
 }
