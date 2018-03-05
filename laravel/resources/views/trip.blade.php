@@ -12,12 +12,18 @@
                         <table class="table">
                             <tbody>
                             @if (!is_null($trips))
+                                <thead>
+                                    <tr>
+                                        <td>From</td>
+                                        <td>To</td>
+                                    </tr>
+                                </thead>
                                 @foreach($trips as $trip)
                                     <tr>
                                         <td>{{$trip->origin}}</td>
                                         <td>{{$trip->destination}}</td>
                                         <td>
-                                            <form action="">
+                                            <form action="/trip/{{$trip->id}}" method="POST">
                                                 <button type="submit" name="remove" class="btn btn-sm btn-danger">REMOVE</button>
                                                 {{ csrf_field() }}
                                             </form>

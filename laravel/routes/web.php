@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/trip', 'TripController@index')->name('trip');
+Route::post('/trip/{trip}', 'TripController@remove');

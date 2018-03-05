@@ -12,6 +12,12 @@
                         <table class="table">
                             <tbody>
                             @if (!is_null($flights))
+                                <thead>
+                                    <tr>
+                                        <td>From</td>
+                                        <td>To</td>
+                                    </tr>
+                                </thead>
                                 @foreach($flights as $flight)
                                     <tr>
                                         <td> {{$flight->origin}} </td>
