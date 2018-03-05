@@ -52,7 +52,7 @@ class HomeController extends Controller
         }
         else
         {
-           $flights = Flight::all();
+           $flights = Flight::orderBy('origin','asc')->get();
         }
 
         return view('home', ['flights'=>$flights]);
