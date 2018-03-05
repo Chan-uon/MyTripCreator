@@ -31,10 +31,13 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <h3>There are currently no available flights.</h3>
+                                <h3>There are currently no available flights. Please refresh the page.</h3>
                             @endif
                             </tbody>
                         </table>
+                        @if (!is_null($flights))
+                            {{ $flights->links() }}
+                        @endif
                     @endif
                 </div>
             </div>

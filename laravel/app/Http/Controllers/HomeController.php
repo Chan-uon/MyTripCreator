@@ -27,11 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $select_flights = 20;
+        $select_flights = 40;
         $flights = null;
         if (Flight::get()->isEmpty())
         {
-            while($select_flights > 0){
+            while($select_flights > 0)
+            {//randomly create 40 flights and insert it into flights table
                 $origin = Airline::inRandomOrder()->first();
                 $destination = Airline::inRandomOrder()->first();
                 if ($origin->id !== $destination->id)
@@ -52,7 +53,7 @@ class HomeController extends Controller
         }
         else
         {
-           $flights = Flight::orderBy('origin','asc')->get();
+           $flights = Flight::orderBy('origin','asc')->paginate(10);
         }
 
         return view('home', ['flights'=>$flights]);

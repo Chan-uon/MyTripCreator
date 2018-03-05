@@ -35,6 +35,9 @@
                             @endif
                             </tbody>
                         </table>
+                        @if (!is_null($trips))
+                            {{ $trips->links() }}
+                        @endif
                     @endif
                 </div>
             </div>

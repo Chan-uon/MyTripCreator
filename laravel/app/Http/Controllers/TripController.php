@@ -15,7 +15,7 @@ class TripController extends Controller
         $trips = null;
         if(!$user->flights->isEmpty())
         {
-            $trips = $user->flights;
+            $trips = $user->flights()->paginate(10);
         }
 
         return view('trip', ['trips'=> $trips]);
