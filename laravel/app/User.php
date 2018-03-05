@@ -27,8 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function trips()
+    public function flights()
     {
-        return $this->belongsToMany(Trip::class);
+        return $this->belongsToMany(Flight::class, 'trips', 'user_id', 'flight_id');
     }
 }
