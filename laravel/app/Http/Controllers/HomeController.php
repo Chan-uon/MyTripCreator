@@ -60,10 +60,19 @@ class HomeController extends Controller
 
     public function add($flight)
     {
-        $trip = new Trip;
-        $trip->user_id = Auth::id();
-        $trip->flight_id = $flight;
-        $trip->save();
-        return redirect('/home');
+        $target = Trip::where('flight_id', '=', $flight)
+                    ->where('user_id', '=', Auth::id())->get();
+        if ($target->isEmpty())
+        {
+            $trip = new Trip;
+            $trip->user_id = Auth::id();
+            $trip->flight_id = $flight;
+            $trip->save();
+            return redirect('/trip');
+        }
+        else
+        {
+            return redirect('/trip');
+        }
     }
 }
