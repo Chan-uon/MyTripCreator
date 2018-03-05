@@ -23,7 +23,7 @@
                                         <td> {{$flight->origin}} </td>
                                         <td> {{$flight->destination}} </td>
                                         <td>
-                                            <form action="">
+                                            <form action="/home/{{$flight->id}}" method="POST">
                                                 <button type="submit" name="add" class="btn btn-sm btn-success">ADD</button>
                                                  {{ csrf_field() }}
                                             </form>

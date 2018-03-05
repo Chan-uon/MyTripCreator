@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/home/{flight}', 'HomeController@add');
 
 Route::get('/trip', 'TripController@index')->name('trip');
 Route::post('/trip/{trip}', 'TripController@remove');

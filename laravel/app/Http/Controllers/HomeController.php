@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Airline;
 use App\Flight;
+use App\Trip;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -54,5 +56,14 @@ class HomeController extends Controller
         }
 
         return view('home', ['flights'=>$flights]);
+    }
+
+    public function add($flight)
+    {
+        $trip = new Trip;
+        $trip->user_id = Auth::id();
+        $trip->flight_id = $flight;
+        $trip->save();
+        return redirect('/home');
     }
 }
